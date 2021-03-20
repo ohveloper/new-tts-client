@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToRecord } from "../actions/recordAction";
 import "../componentsCss/Clock.css";
+import { getNumberOfWeek } from "../functions/getNumberOfweek";
 
 function Clock() {
   const [tick, setTick] = useState(0);

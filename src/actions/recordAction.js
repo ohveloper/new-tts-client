@@ -1,13 +1,24 @@
 export const ADD_TO_RECORD = "ADD_TO_RECORD";
+const axios = require("axios");
 
-export const addToRecord = (record) => {
+export async function addToRecord(recordData) {
+  await axios
+    .post("http://localhost:5000", recordData, { "Content-Type": "application/json", withCredentials: true })
+    .then((res) => console.log(res))
+    .catch((e) => console.log(e));
+
+  const getWeeklyRecord = await axios
+    .get("http://localhost:5000", { "Content-Type": "application/json", withCredentials: true })
+    .then((res) => res.data)
+    .catch((e) => console.log(e));
+
   return {
     type: ADD_TO_RECORD,
     payload: {
-      record,
+      getWeeklyRecord,
     },
   };
-};
+}
 
 // let a = {
 //   users: {},

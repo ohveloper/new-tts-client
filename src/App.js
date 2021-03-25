@@ -56,9 +56,9 @@ function App() {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");
     if (authorizationCode) {
+      dispatch(setIsLoading(true));
       getAccessToken(authorizationCode);
     }
-    dispatch(setIsLoading(true));
   }, []);
   return isLoading ? (
     <Loading />

@@ -1,220 +1,189 @@
-/* body{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-} */
-
-
-.LoginDiv{
-    position: relative;
-    z-index: 2;
+#pw {
+  color: black;
 }
 
-.LoginDiv h1{
-    font-size: 32px;
-    color: white;
-    text-align: center;
-    margin-bottom: 60px;
+#id {
+  color: black;
 }
 
-.inputLine{
-    width: 400px;
-    position: relative;
-    margin-top: 20px;
-}
-.inputLine:first-child{
-    margin-top: 0;
-}
-.inputLine input{
-    width: 95%;
-    padding: 20px 10px 10px;
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid gray;
-    font-size: 18px;
-    color: white;
-    outline: none;
+.LoginDiv {
+  position: relative;
+  z-index: 2;
 }
 
-.inputLine label{
-    position: absolute;
-    left: 10px;
-    top: 15px;
-    font-size: 18px;
-    color: gray;
-    transition: top .5s ease;
-
-}
-.inputLine input:focus +label,
-.inputLine input:valid +label{
-    top: -2px;
-    font-size: 13px;
-    color: #166cea;
-
+.LoginDiv h1 {
+  font-size: 32px;
+  color: black;
+  text-align: center;
+  margin-bottom: 60px;
 }
 
-.LoginBtn, .SignUpBtn{
-    margin-top: 30px;
+.inputLine {
+  width: 400px;
+  position: relative;
+  margin-top: 20px;
 }
 
-
-.LoginBtn button, .SignUpBtn button{
-    width: 100%;
-    height: 40px;
-    background-color: #166cea;
-    color: white;
-    font-size: 20px;
-    border: none;
-    border-radius: 25px;
+.inputLine:first-child {
+  margin-top: 0;
+}
+.inputLine input {
+  width: 99%;
+  padding: 20px 10px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  color: white;
+  outline: none;
 }
 
-.SignUpBtn button{
-    background-color: gray;
-
+.inputLine label {
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  font-size: 18px;
+  color: gray;
+  transition: top 0.5s ease;
+}
+.inputLine input:focus + label,
+.inputLine input:valid + label {
+  top: -2px;
+  font-size: 13px;
+  color: #166cea;
 }
 
-
-.OauthDiv{
-    color: white;
-    margin-top: 40px;
-    justify-content: space-between;
-    display: flex;
+.LoginBtn,
+.SignUpBtn {
+  margin-top: 30px;
 }
 
-.AuthGithub{
-    margin-left: 100px;
-    text-align: center;
+.LoginBtn button,
+.SignUpBtn button {
+  width: 100%;
+  height: 40px;
+  background-color: #166cea;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
 }
 
-.AuthGoogle{
-    margin-right: 100px;
-    text-align: center;
+.SignUpBtn button {
+  background-color: gray;
 }
 
-
-.fa-github, .fa-google{
-    font-size: 40px;
-    color: white;
-
+.OauthDiv {
+  color: white;
+  margin-top: 40px;
+  align-items: center;
 }
 
-.or{
-    margin-top: 10px;
+.AuthGithub {
+  cursor: pointer;
+  text-align: center;
 }
 
-/* .AuthGithub a i{
-    width: 20px;
-    height: 20px;
-    font-size: 15px;
-    color: #999;
-    text-decoration: none;
-} */
+.AuthGoogle {
+  margin-right: 100px;
+  text-align: center;
+}
 
+.fa-github,
+.fa-google {
+  font-size: 40px;
+  color: black;
+}
 
+.fa-github:hover,
+.fa-google:hover {
+  color: orange;
+}
 
+.or {
+  margin-top: 10px;
+}
+
+.LoginBtn button:hover {
+  background-color: orange;
+}
+.SignUpBtn button:hover {
+  background-color: orange;
+}
 
 /* LoginPage.js css 처리 */
 
-
-.container{
-    width: 1200px;
-    border-radius: 4px;
-    height: 100%;
-    background-color: #0A122A;
-    color: white;
-    /* width: 100%; */
-    margin: 100px auto;
-    display: flex;
-
+.container {
+  width: 1200px;
+  border-radius: 4px;
+  height: 100%;
+  background-color: #fcf6f5;
+  color: black;
+  margin: 100px auto;
+  display: flex;
 }
 
-.cover{
-    /* width: 100px; */
-    /* position: relative; */
-    flex-grow: 4;
-    flex-shrink: 1;
-    height: 100%;
-    /* background-image: url('../tts.svg'); */
+.cover {
+  flex-grow: 4;
+  flex-shrink: 1;
+  height: 100%;
 }
 
-.content{
-    /* position:absolute; */
-    /* height: 100vh; */
-    flex-shrink: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    flex-grow: 2;
+.content {
+  flex-shrink: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  flex-grow: 2;
 }
 
-.cover-photo{
-    height: auto;
+.cover-photo {
+  height: auto;
 }
 
-/*1025 pc*/
- @media screen and (max-width:1366px){
-    
+/*ipad*/
+@media screen and (max-width: 1366px) {
+  .container {
+    margin-top: 150px;
+    width: 100%;
+  }
 
-    .container{
-        width: 100%;
-        margin:0 auto;
-    }
-
-    .content{
-        position: absolute;
-        top: 40%;
-        left:46%
-    }
-    .LoginBody{
-        padding:30px 30px;
-        background-color: #0A122A;
-    }
+  .content {
+    position: absolute;
+    top: 27%;
+    left: 45%;
+  }
+  .LoginBody {
+    padding: 30px 30px;
+    background-color: #fcf6f5;
+  }
 }
 
+/*414 iphone6+ */
+@media screen and (max-width: 552px) {
+  .cover {
+    display: none;
+  }
 
-@media screen and (max-width:1256px){
-    .content{
-        top: 35%;
-        left:45%
-    }
+  .content {
+    top: 10%;
+    left: 30%;
+  }
 }
 
-@media screen and (max-width:1146px){
-    .content{
-        top: 23%;
-        left:45%
-    }
+/*375 iphoneX */
+@media screen and (max-width: 500px) {
+  .content {
+    top: 10%;
+    left: 41%;
+  }
 }
 
-
-/*768px 태블릿*/
-@media screen and (max-width:1025px){
-    .content{
-        top: 21%;
-        left:45%
-    }
+/* 320px iphone5 */
+@media screen and (max-width: 427px) {
+  .content {
+    margin-left: 35px;
+  }
 }
-
-
-
-/* 481px 모바일 */
-@media screen and (max-width:641px){
-    .container{
-        margin: 150px auto;
-    }
-
-    .content{
-        top: 17.5%;
-        left:45%
-    }
-}
-/* @media screen and (max-width:1100px){
-    .content{
-        top: 0;
-        left:45%
-    }
-} */

@@ -8,17 +8,24 @@ function OneRecordBox() {
   const thisWeek = getNumberOfWeek();
 
   const state = useSelector((state) => state.recordReducer);
-  const { records } = state;
-  console.log("records:", records);
-  const dayCount = ["월", "화", "수", "목", "금", "토", "일"];
-
+  const { records, isLogin } = state;
+  const dayCount = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   return (
     <div className="oneRecordBox">
-      {Object.keys(records).length !== 0
-        ? records[1].map((dayTime, idx) => {
-            return <OneRecord dayTime={dayTime} idx={idx} key={idx} dayCount={dayCount} />;
+      {thisWeek in records
+        ? records[thisWeek].map((dayTime, idx) => {
+            return (
+              <OneRecord
+                dayTime={dayTime}
+                idx={idx}
+                key={idx}
+                dayCount={dayCount}
+              />
+            );
           })
-        : "로딩중입니다"}
+        : isLogin
+        ? "Start Work!"
+        : "Please Login"}
     </div>
   );
 }

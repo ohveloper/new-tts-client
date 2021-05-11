@@ -2,17 +2,27 @@ import "../componentsCss/Login.css";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserInfo, setIsLogin, setLogout } from "../actions/userAction";
+import { setIsLoading } from "../actions/LoadingAction";
 import { setRecords, axiosData } from "../actions/recordAction";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+const dotenv = require('dotenv');
+dotenv.config();
+const api = process.env.REACT_APP_SERVER_ADDRESS || "https://localhost:5000";
 
-function Login(props) {
+
+function Login({ModalHandler}) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const githubUrl = "https://github.com/login/oauth/authorize?client_id=deacb4e14d3c7d66ffcf";
-  // const googleUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
+
+
+  
+  const oAuthHandler = () => {
+    window.location.assign(githubUrl);
+  };
 
   const emailHandler = (e) => {
     setEmail(e.target.value);
@@ -20,45 +30,33 @@ function Login(props) {
   const passwordHandler = (e) => {
     setPassword(e.target.value);
   };
-  // const submitHandler = async (e) => {
-  //   e.preventDefault();
-  //   const body = {
-  //     email,
-  //     password,
-  //   };
-  //   await axios.post("https://localhost:5000/main/login", body, { accept: "application/json", withCredentials: true }).then((res) => {
-  //     console.log(res.data);
-  //     if (res.data.message === "login successfully") {
-  //       dispatch(setIsLogin());
-  //       dispatch(setUserInfo(body)).then((res) => {
-  //         history.push("/main");
-  //       });
-  //     } else {
-  //       history.push("/login");
-  //       alert("no member");
-  //     }
-  //   });
-  // };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const body = {
       email,
       password,
     };
+    dispatch(setIsLoading(true));
     await axios
-      .post("https://localhost:5000/main/login", body, { accept: "application/json", withCredentials: true })
+      .post(api + "/main/login", body, { accept: "application/json", withCredentials: true })
       .then((res) => res.data)
       .then((data) => {
         if (data.message === "login successfully") {
+          dispatch(axiosData(api + "/user/record", setRecords));
           dispatch(setIsLogin());
           dispatch(setUserInfo());
-          dispatch(axiosData("https://localhost:5000/user/record", setRecords));
           history.push("/main");
+          dispatch(setIsLoading(false));
         } else {
-          history.push("/login");
           alert("no member");
+          dispatch(setIsLoading(false));
         }
-      });
+      })
+      .catch(e=>{
+        alert('no member');
+        dispatch(setIsLoading(false));
+      })
   };
   const guestHandler = (e) => {
     dispatch(setLogout());
@@ -66,6 +64,7 @@ function Login(props) {
   };
 
   return (
+    <>
     <div className="LoginBody">
       <section className="LoginSec">
         <form className="LoginDiv" onSubmit={submitHandler}>
@@ -82,7 +81,9 @@ function Login(props) {
             <button type="submit">LOGIN</button>
           </div>
           <div className="LoginBtn">
-            <button type="button">SignUp</button>
+            <button type="button" onClick={ModalHandler}>
+              SignUp
+            </button>
           </div>
           <div className="SignUpBtn">
             <button type="button" onClick={guestHandler}>
@@ -91,20 +92,15 @@ function Login(props) {
           </div>
           <div className="OauthDiv">
             <div className="AuthGithub">
-              <a href={githubUrl}>
+              <div onClick={oAuthHandler}>
                 <i className="fab fa-github"></i>
-              </a>
-            </div>
-            <div className="or">or</div>
-            <div className="AuthGoogle">
-              <a href="/#">
-                <i className="fab fa-google"></i>
-              </a>
+              </div>
             </div>
           </div>
         </form>
       </section>
     </div>
+    </>
   );
 }
 

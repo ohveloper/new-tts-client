@@ -9,17 +9,15 @@ function Clock() {
   const [tick, setTick] = useState(0);
   const [min, setMin] = useState(0);
   const [hh, setHh] = useState(0);
-  const [delay, setDelay] = useState(1000);
+  const delay= 1000;
   const [tickControl, setTickControl] = useState(false);
   const week = getNumberOfWeek();
   const day = getNumberOfToday();
   const time = hh * 3600 + min * 60 + tick;
   const postData = { day, time, week, recordName: "Coding" };
   const dispatch = useDispatch();
-  // console.log(postData);
 
   const handleClick = () => {
-    //! 서버 연결하면 열어주기
     if (tickControl) {
       dispatch(addToRecord(postData));
     }
@@ -49,7 +47,6 @@ function Clock() {
         setTickControl(tickControl ? false : true);
         handleClick();
       }}>
-      {/* {console.log(postData)} */}
       <div className="hhMm">
         {hh < 10 ? `0${hh}` : hh}:{min < 10 ? `0${min}` : min}
       </div>
@@ -78,4 +75,3 @@ function useInterval(callback, delay) {
 
 export default Clock;
 
-// new Date().toLocaleTimeString()

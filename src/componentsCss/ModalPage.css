@@ -1,0 +1,54 @@
+.ModalBackground{
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ModalDiv{
+    position: relative;
+    width: 1000px;
+    height: 600px;
+    border-radius: 10px;
+    background-color: #FCF6F5;
+    color: white;
+    margin: 100px auto;
+    display: flex;
+}
+
+.CloseBtn{
+    position: absolute;
+    font-size: 30px;
+    background-color: #FCF6F5;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    padding: 3px 8px;
+    cursor: pointer;
+    top:20px;
+    right:20px;
+    padding: 0;
+
+}
+
+/*375 iphoneX */
+@media screen and (max-width:500px){
+    
+    .CloseBtn{
+        font-size: 20px;
+    }
+    
+}
+
+
+/* 320px iphone5 */
+@media screen and (max-width:427px){
+    
+    .CloseBtn{
+        font-size: 20px;
+    }
+}

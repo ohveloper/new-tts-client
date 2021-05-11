@@ -1,10 +1,23 @@
 import "../componentsCss/NavBar.css";
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
+import {setLogout} from '../actions/userAction'
+import {useDispatch} from "react-redux";
+import axios from 'axios'
+const dotenv = require("dotenv");
+dotenv.config();
+const api = process.env.REACT_APP_SERVER_ADDRESS || "https://localhost:5000";
 
 function NavBar() {
+  const dispatch = useDispatch()
   const [active, setActive] = useState(false);
 
-  // 리액트 훅스 사용 네브바 햄버거 토글 활성화 or 비활성화
+  const logoutHandler=()=>{
+    axios.get(api + '/user/logout',{accept:'application/json',withCredentials:true}).then(res=>res.data)
+    .then(e => {
+      dispatch(setLogout())
+    })
+  }
   const hambergerHandler = () => {
     if (active) {
       setActive(false);
@@ -12,29 +25,34 @@ function NavBar() {
       setActive(true);
     }
   };
+  
+
   return (
     <div>
       <nav className="navBar">
         <div className="navBarLogo">
-          <a href="/">tts</a>
+          <Link to="/welcome">tts</Link>
         </div>
         <ul className={`navBarMenu ${active ? "active" : ""}`}>
           <li>
-            <a href="/main">초시계</a>
+          <Link to='/welcome'>Home</Link>
           </li>
           <li>
-            <a href="/mypage">마이페이지</a>
+            <Link to='/main'>Record</Link>
           </li>
           <li>
-            <a href="/" className="navBarSignup">
-              로그아웃
-            </a>
+            <Link to='/follow'>Follow</Link>
+          </li>
+          <li>
+            <Link to='/mypage'>Mypage</Link>
+          </li>
+          <li>
+            <Link to='/' className="navBarSignup" onClick={logoutHandler}>Logout</Link>
           </li>
         </ul>
-        <a className="navBarHambeger" href="/#" onClick={hambergerHandler}>
-          {" "}
+        <Link className="navBarHambeger" to='#' onClick={hambergerHandler}>
           <i className="fas fa-bars"></i>
-        </a>
+        </Link>
       </nav>
     </div>
   );
